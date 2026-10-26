@@ -1,0 +1,126 @@
+/* motion.css — unified reveal system (all screens). Driven by js/motion.js */
+:root {
+  --mo-ease: cubic-bezier(.22, .8, .3, 1)
+}
+
+/* Phase 1: the screen background fades in first */
+.splash,
+.simple-page,
+.ax-page {
+  animation: mo-root .6s ease backwards
+}
+
+.mo-keep {
+  animation: none !important
+}
+
+/* Later phases: every staged element (delay set per element by motion.js) */
+.mo-i {
+  animation: var(--mo-a) var(--mo-t, .65s) var(--mo-ease) var(--mo-d, 0s) backwards
+}
+
+@keyframes mo-root {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes mo-fade {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes mo-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px)
+  }
+
+  to {
+    opacity: 1;
+    transform: none
+  }
+}
+
+@keyframes mo-scale {
+  from {
+    opacity: 0;
+    transform: scale(.86)
+  }
+
+  to {
+    opacity: 1;
+    transform: none
+  }
+}
+
+@keyframes mo-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-22px)
+  }
+
+  to {
+    opacity: 1;
+    transform: none
+  }
+}
+
+/* page exit (fast) */
+.mo-out {
+  animation: mo-out .26s ease forwards !important;
+  pointer-events: none
+}
+
+@keyframes mo-out {
+  to {
+    opacity: 0;
+    transform: translateY(-10px) scale(.992)
+  }
+}
+
+/* After reveal: slow, subtle idle motion (individual transform props, never clash with reveal) */
+.mo-float {
+  animation: mo-float 7s ease-in-out var(--mo-fd, 0s) infinite
+}
+
+.mo-float-s {
+  animation: mo-float 9s ease-in-out var(--mo-fd, 0s) infinite;
+  --mo-amp: -5px
+}
+
+@keyframes mo-float {
+
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg
+  }
+
+  50% {
+    translate: 0 var(--mo-amp, -9px);
+    rotate: .8deg
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+  .splash,
+  .simple-page,
+  .ax-page,
+  .mo-i,
+  .mo-float,
+  .mo-float-s,
+  .mo-out {
+    animation: none !important
+  }
+}

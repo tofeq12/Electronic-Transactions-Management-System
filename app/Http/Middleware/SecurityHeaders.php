@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+/**
+ * Phase 12 — baseline response hardening for every web response:
+ * - nosniff: browsers never guess a different content type (avatars,
+ *   CSV downloads, attachments).
+ * - X-Frame-Options + CSP frame-ancestors: no third-party origin can
+ *   frame the app (clickjacking).
+ * - Referrer-Policy: URLs never leak to external sites.
+ * - Permissions-Policy: the app never uses camera/microphone/geolocation.
+ *
+ * Deliberately NO full Content-Security-Policy: the views rely on inline
+ * scripts and styles; a strict CSP would need nonces across every page —
+ * noted as a deployment follow-up, not guessed at here.
+ */
+class SecurityHeaders
+{
+    public function handle(Request $request, Closure $next): Response
+    {
+        $response = $next($request);
+
+        $response->headers->set('X-Content-Type-Options', 'nosniff');
+        $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
+        $response->headers->set('Content-Security-Policy', "frame-ancestors 'self'");
+        $response->headers->set('Referrer-Policy', 'same-origin');
+        $response->headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+
+        return $response;
+    }
+}

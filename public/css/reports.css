@@ -1,0 +1,427 @@
+/* =========================================================
+   reports.css — Reports screen (pages/reports.html)
+   Every selector is scoped with .rp-* so other pages are untouched.
+   ========================================================= */
+
+.rp-main {
+  --rp-bar: #4d8df2;
+  --rp-bar-hover: #2f6fdd;
+  --rp-border: #e6eaf2;
+  --rp-muted: #8a94ab;
+  --rp-ease: cubic-bezier(.22, .8, .3, 1);
+  background: #fff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.rp-main .topbar {
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--rp-border);
+}
+
+.rp-print-meta {
+  display: none;
+  margin: 0 0 14px;
+  font-weight: 700;
+}
+
+/* ---------- Filters ---------- */
+.rp-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  padding: 14px 18px 18px;
+  margin-bottom: 18px;
+  background: #f8f9fc;
+  border: 1px solid var(--rp-border);
+  border-radius: var(--radius-lg);
+}
+
+.rp-filter label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--rp-muted);
+}
+
+.rp-control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  background: #fff;
+  border: 1px solid var(--rp-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 6px rgba(16, 32, 64, .04);
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.rp-control:hover {
+  border-color: #c9d3ea;
+}
+
+.rp-control:focus-within {
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 3px rgba(61, 95, 224, .14);
+}
+
+.rp-control.is-invalid {
+  border-color: var(--red-text);
+  box-shadow: 0 0 0 3px rgba(226, 72, 61, .12);
+}
+
+.rp-control select,
+.rp-control input {
+  width: 100%;
+  height: 100%;
+  padding-block: 0;
+  padding-inline: 16px 44px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+.rp-control__value {
+  flex: 1;
+  padding-inline: 16px 44px;
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  direction: ltr;
+  text-align: right;
+  pointer-events: none;
+}
+
+/* real date input stays on top (invisible) so the native picker opens on click while the value is shown as YYYY/MM/DD */
+.rp-control--date input {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  opacity: 0;
+}
+
+.rp-control--date input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rp-control__icon {
+  position: absolute;
+  inset-inline-end: 14px;
+  width: 18px;
+  height: 18px;
+  color: #6b7691;
+  pointer-events: none;
+}
+
+.rp-error {
+  margin: -6px 0 14px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--red-text);
+}
+
+.rp-error[hidden] {
+  display: none;
+}
+
+/* ---------- Stat cards ---------- */
+.rp-stats {
+  display: grid;
+  /* ست بطاقات (إجمالي + خمس حالات) بخلايا مرنة تتكيّف مع أي عرض. */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.rp-stat {
+  --c: var(--red-text);
+  --bg: var(--red-bg);
+  display: flex;
+  align-items: stretch;
+  min-height: 84px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--rp-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform .25s var(--rp-ease), box-shadow .25s var(--rp-ease);
+}
+
+.rp-stat:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(16, 32, 64, .13);
+}
+
+.rp-stat--orange {
+  --c: var(--orange-text);
+  --bg: var(--orange-bg);
+}
+
+.rp-stat--green {
+  --c: var(--green-text);
+  --bg: var(--green-bg);
+}
+
+.rp-stat--blue {
+  --c: var(--blue-500);
+  --bg: #e7edfd;
+}
+
+.rp-stat--purple {
+  --c: #7c3aed;
+  --bg: #efe9fd;
+}
+
+.rp-stat--gray {
+  --c: #64748b;
+  --bg: #eef1f6;
+}
+
+.rp-stat__icon {
+  flex: 0 0 52px;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--c);
+}
+
+.rp-stat__icon svg {
+  width: 22px;
+  height: 22px;
+  transition: transform .25s var(--rp-ease);
+}
+
+.rp-stat:hover .rp-stat__icon svg {
+  transform: scale(1.14);
+}
+
+.rp-stat__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 12px 10px;
+}
+
+.rp-stat__label {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--rp-muted);
+}
+
+.rp-stat__value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Bar chart ---------- */
+.rp-chart {
+  padding: 18px 20px 10px;
+  margin-bottom: 20px;
+  background: #fff;
+  border: 1px solid var(--rp-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.rp-chart__title {
+  margin-bottom: 10px;
+  font-size: .95rem;
+  font-weight: 800;
+}
+
+.rp-chart__body {
+  width: 100%;
+  min-height: 240px;
+}
+
+.rp-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rp-axis-text {
+  font-family: var(--font-main);
+  font-size: 11px;
+  fill: var(--rp-muted);
+}
+
+.rp-axis {
+  stroke: #cfd6e4;
+  stroke-width: 1;
+}
+
+.rp-grid {
+  stroke: #eef1f7;
+  stroke-width: 1;
+}
+
+.rp-bar {
+  fill: var(--rp-bar);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition: fill .2s;
+}
+
+.rp-bar:hover {
+  fill: var(--rp-bar-hover);
+}
+
+.is-animated .rp-bar {
+  animation: rp-grow .75s var(--rp-ease) calc(var(--rp-delay, 0s) + var(--i) * .09s) backwards;
+}
+
+@keyframes rp-grow {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* ---------- Action buttons ---------- */
+/* أزرار بعرض المحتوى (لا تمتدّ لثلث الصفحة) + انسياب عند الضيق. */
+.rp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rp-btn {
+  --c: #3b6be8;
+  --sh: rgba(59, 107, 232, .32);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: var(--radius-md);
+  background: var(--c);
+  color: #fff;
+  font-size: .95rem;
+  font-weight: 700;
+  box-shadow: 0 10px 22px var(--sh);
+  transition: transform .2s var(--rp-ease), box-shadow .2s var(--rp-ease), filter .2s;
+}
+
+.rp-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.rp-btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.07);
+  box-shadow: 0 14px 28px var(--sh);
+}
+
+.rp-btn:active {
+  transform: scale(.98);
+}
+
+.rp-btn--pdf {
+  --c: #e5483f;
+  --sh: rgba(229, 72, 63, .30);
+}
+
+/* Excel = ملف CSV بترميز BOM (يفتحه Excel بالعربية مباشرة) — أخضر
+   كتصميم المرجع: Excel أخضر / PDF أحمر / عرض أزرق. */
+.rp-btn--excel {
+  --c: #1f9d4c;
+  --sh: rgba(31, 157, 76, .30);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px) {
+  .rp-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rp-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rp-filters .rp-filter:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width:620px) {
+  .rp-filters {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .rp-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .rp-chart {
+    padding: 14px 12px 8px;
+  }
+}
+
+@media (max-width:420px) {
+  .rp-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Print (PDF export) ---------- */
+@media print {
+
+  body.rp-printing .sidebar,
+  body.rp-printing .sb-overlay,
+  body.rp-printing .menu-btn,
+  body.rp-printing .rp-actions {
+    display: none !important;
+  }
+
+  body.rp-printing .rp-print-meta {
+    display: block;
+  }
+
+  body.rp-printing .main-area {
+    padding: 0;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+  .rp-stat,
+  .rp-btn,
+  .rp-control,
+  .rp-bar,
+  .rp-stat__icon svg {
+    transition: none;
+  }
+
+  .is-animated .rp-bar {
+    animation: none;
+  }
+}

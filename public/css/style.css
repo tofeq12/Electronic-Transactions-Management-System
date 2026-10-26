@@ -1,0 +1,262 @@
+/* =========================================================
+   إتقان — نظام إدارة المعاملات الإلكترونية
+   style.css : Variables / Reset / Typography / Base Layout
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Colors */
+  --navy-900: #0d1b34;
+  --navy-800: #132a4d;
+  --navy-700: #1a3357;
+  --navy-600: #1f3c66;
+  --blue-500: #3d5fe0;
+  --blue-600: #3652c7;
+  --blue-400: #5b7cf0;
+  --blue-glow: rgba(61, 95, 224, .35);
+
+  --bg-light: #f4f6fb;
+  --bg-white: #ffffff;
+  --border-light: #e7eaf3;
+
+  --text-dark: #16243f;
+  --text-body: #3a4560;
+  --text-muted: #8a94ab;
+  --text-on-navy: #ffffff;
+  --text-on-navy-muted: #aab6d3;
+
+  --green-bg: #e5f7ec;
+  --green-text: #1fae5f;
+  --orange-bg: #fdf1de;
+  --orange-text: #e2932e;
+  --red-bg: #fbe8e7;
+  --red-text: #e2483d;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 10px 30px rgba(16, 32, 64, .08);
+  --shadow-btn: 0 10px 24px rgba(61, 95, 224, .28);
+
+  --font-main: 'Cairo', 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-light);
+  color: var(--text-dark);
+  direction: rtl;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue-500);
+  outline-offset: 2px;
+}
+
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* ---------- Language toggle (top-left pill button) ---------- */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.lang-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Brand lockup (top-right) ---------- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-text {
+  text-align: right;
+}
+
+.brand-name {
+  font-weight: 800;
+  font-size: .95rem;
+}
+
+.brand-sub {
+  font-size: .72rem;
+}
+
+.brand-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--blue-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px var(--blue-glow);
+}
+
+.brand-badge svg {
+  width: 18px;
+  height: 18px;
+  color: #fff;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: .92rem;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--blue-400), var(--blue-500));
+  color: #fff;
+  box-shadow: var(--shadow-btn);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px var(--blue-glow);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-outline {
+  background: #fff;
+  color: var(--text-body);
+  border: 1px solid var(--border-light);
+}
+
+.btn-outline:hover {
+  background: #f8f9fc;
+}
+
+.btn-ghost {
+  color: var(--blue-500);
+  font-weight: 700;
+  font-size: .85rem;
+}
+
+/* ---------- Progress dots / step bar ---------- */
+.step-track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .75rem;
+}
+
+.step-bar {
+  width: 60px;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, .25);
+  overflow: hidden;
+}
+
+.step-bar>span {
+  display: block;
+  height: 100%;
+  background: var(--blue-400);
+  border-radius: var(--radius-pill);
+}
+
+/* ---------- Utility ---------- */
+.text-center {
+  text-align: center;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mt-24 {
+  margin-top: 24px;
+}
+
+.hidden {
+  display: none !important;
+}

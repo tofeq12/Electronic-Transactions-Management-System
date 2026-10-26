@@ -1,0 +1,50 @@
+/* ltr.css — English (LTR) compatibility layer.
+   Loaded only when the interface locale is English. The ITQAAN design is
+   RTL-first, so this file mirrors the few physical CSS properties that do
+   NOT flip automatically with dir="ltr" (body direction, text alignment,
+   corner-positioned decorations). Everything using logical properties
+   (margin-inline-*, padding-inline-*, flex/grid) flips natively.
+   All selectors are prefixed with html[dir="ltr"] so they win over the
+   original rules no matter which stylesheet declares them. */
+
+html[dir="ltr"] body {
+  direction: ltr;
+}
+
+/* Text that was pinned to the right edge in RTL */
+html[dir="ltr"] .brand-text,
+html[dir="ltr"] .splash-hero-text,
+html[dir="ltr"] .choice-row,
+html[dir="ltr"] thead th,
+html[dir="ltr"] .recent-item .ri-main,
+html[dir="ltr"] .rp-control__value,
+html[dir="ltr"] .ui-modal .um-reason,
+html[dir="ltr"] .ui-modal .um-hint {
+  text-align: left;
+}
+
+/* Corner-anchored decorations — mirror to the opposite side */
+html[dir="ltr"] .lang-card .check {
+  right: auto;
+  left: 12px;
+}
+
+html[dir="ltr"] .field-password .toggle-pass {
+  left: auto;
+  right: 14px;
+}
+
+html[dir="ltr"] .notif-badge {
+  left: auto;
+  right: -6px;
+}
+
+html[dir="ltr"] .hero-dot {
+  left: auto;
+  right: 26px;
+}
+
+html[dir="ltr"] .hero-chip.chip-lock {
+  right: auto;
+  left: -30px;
+}

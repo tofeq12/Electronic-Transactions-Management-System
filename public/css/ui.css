@@ -1,0 +1,572 @@
+/* ui.css — مكوّنات مشتركة: نافذة التأكيد، التنبيهات، قائمة الصف، صفحات التفاصيل والملف الشخصي */
+.badge-gray {
+    background: #eceff6;
+    color: var(--text-muted);
+}
+
+.btn-danger {
+    background: var(--red-text);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(226, 72, 61, .25);
+}
+
+.btn-danger:hover {
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background: var(--green-text);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(31, 174, 95, .25);
+}
+
+.btn-success:hover {
+    transform: translateY(-1px);
+}
+
+.btn-sm {
+    padding: 9px 16px;
+    font-size: .84rem;
+}
+
+.field textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    background: #fbfcfe;
+    font-size: .9rem;
+    min-height: 90px;
+    resize: vertical;
+}
+
+.field textarea:focus {
+    border-color: var(--blue-500);
+    background: #fff;
+    outline: none;
+}
+
+.field-full {
+    grid-column: 1 / -1;
+}
+
+.field .hint {
+    font-size: .75rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+.field input[readonly] {
+    background: #f1f3f9;
+    color: var(--text-muted);
+}
+
+.sidebar-user {
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.sidebar-user:hover {
+    background: rgba(255, 255, 255, .1);
+}
+
+/* ---- نافذة التأكيد ---- */
+.ui-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 27, 52, .55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    animation: ui-fade .18s ease;
+}
+
+.ui-modal {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    max-width: 400px;
+    width: 100%;
+    padding: 26px 24px 22px;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(13, 27, 52, .35);
+    animation: ui-pop .22s var(--mo-ease, ease);
+}
+
+.ui-modal .um-ico {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ui-modal .um-ico svg {
+    width: 26px;
+    height: 26px;
+}
+
+.um-danger .um-ico {
+    background: var(--red-bg);
+    color: var(--red-text);
+}
+
+.um-success .um-ico {
+    background: var(--green-bg);
+    color: var(--green-text);
+}
+
+.um-info .um-ico {
+    background: #eef2fd;
+    color: var(--blue-500);
+}
+
+.ui-modal h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.ui-modal p {
+    color: var(--text-body);
+    font-size: .9rem;
+    margin-top: 6px;
+}
+
+.ui-modal .um-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.ui-modal .um-actions .btn {
+    flex: 1;
+}
+
+/* نافذة سبب الرفض (إلزامي) */
+.ui-modal .um-reason {
+    width: 100%;
+    margin-top: 14px;
+    padding: 10px 12px;
+    border: 1px solid var(--border, #d8dce6);
+    border-radius: 10px;
+    font: inherit;
+    font-size: .9rem;
+    text-align: right;
+    resize: vertical;
+    background: #fff;
+    color: var(--text-body);
+}
+
+.ui-modal .um-reason:focus {
+    outline: none;
+    border-color: var(--blue-500);
+    box-shadow: 0 0 0 3px rgba(59, 93, 217, .15);
+}
+
+.ui-modal .um-hint {
+    min-height: 1.1em;
+    margin-top: 6px;
+    color: var(--red-text, #b42318);
+    font-size: .82rem;
+    font-weight: 700;
+    text-align: right;
+}
+
+@keyframes ui-fade {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes ui-pop {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(.96)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+/* ---- التنبيهات (Toast) ---- */
+.ui-toasts {
+    position: fixed;
+    bottom: 22px;
+    inset-inline: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 1100;
+    pointer-events: none;
+    padding: 0 16px;
+}
+
+.ui-toast {
+    background: var(--navy-800);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    font-size: .88rem;
+    font-weight: 600;
+    box-shadow: 0 14px 30px rgba(13, 27, 52, .3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: ui-pop .22s ease;
+}
+
+.ui-toast.ok {
+    border-inline-start: 4px solid var(--green-text);
+}
+
+.ui-toast.err {
+    border-inline-start: 4px solid var(--red-text);
+}
+
+.ui-toast.out {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: .25s;
+}
+
+/* ---- قائمة الصف (⋮) ---- */
+.ui-menu {
+    position: fixed;
+    background: #fff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: 0 16px 36px rgba(16, 32, 64, .18);
+    padding: 6px;
+    min-width: 170px;
+    z-index: 900;
+    animation: ui-fade .12s ease;
+}
+
+.ui-menu button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    text-align: start;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--text-body);
+}
+
+.ui-menu button:hover {
+    background: var(--bg-light);
+}
+
+.ui-menu button svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.ui-menu .m-danger {
+    color: var(--red-text);
+}
+
+.ui-menu .m-ok {
+    color: var(--green-text);
+}
+
+.ui-menu hr {
+    border: none;
+    border-top: 1px solid var(--border-light);
+    margin: 4px 0;
+}
+
+/* ---- صف جدول قابل للنقر / حالة فارغة ---- */
+[data-href] {
+    cursor: pointer;
+}
+
+tr.row-gone {
+    opacity: 0;
+    transition: opacity .25s;
+}
+
+.table-empty td {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 34px 10px;
+    font-weight: 600;
+}
+
+/* ---- صفحة تفاصيل المعاملة ---- */
+.td-top h1 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.td-no {
+    font-weight: 800;
+}
+
+.td-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.td-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.td-card {
+    padding: 24px 26px;
+}
+
+.td-card-title {
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.td-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 24px;
+}
+
+.td-f.full {
+    grid-column: 1 / -1;
+}
+
+.td-f label {
+    display: block;
+    font-weight: 800;
+    font-size: .9rem;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.td-f div {
+    color: var(--text-body);
+    font-size: .9rem;
+}
+
+.td-files {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 26px;
+}
+
+.td-file {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+}
+
+.td-file .f-name {
+    margin-inline-start: auto;
+    direction: ltr;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--text-body);
+}
+
+.td-file .f-ico {
+    color: var(--red-text);
+    display: flex;
+}
+
+.td-file .f-dl {
+    color: var(--blue-500);
+    display: flex;
+}
+
+.td-file svg {
+    width: 16px;
+    height: 16px;
+}
+
+.td-none {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: .85rem;
+    padding: 10px 0 20px;
+}
+
+.td-log {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-inline-end: 22px;
+}
+
+.td-log::before {
+    content: '';
+    position: absolute;
+    inset-block: 14px;
+    inset-inline-end: 5px;
+    width: 2px;
+    background: #bfe9d0;
+}
+
+.td-step {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.td-step:last-child {
+    border-bottom: none;
+}
+
+.td-step::after {
+    content: '';
+    position: absolute;
+    inset-inline-end: -22px;
+    top: 18px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--green-text);
+}
+
+.td-step.rej::after {
+    border-color: var(--red-text);
+}
+
+.td-step .s-t {
+    font-weight: 800;
+    font-size: .85rem;
+}
+
+.td-step .s-by {
+    font-size: .78rem;
+    color: var(--text-muted);
+}
+
+.td-step .s-at {
+    font-size: .78rem;
+    color: var(--text-dark);
+    font-weight: 700;
+    white-space: nowrap;
+    direction: ltr;
+}
+
+.td-notfound {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.td-notfound h2 {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.td-notfound p {
+    color: var(--text-muted);
+    margin: 6px 0 18px;
+}
+
+/* ---- الملف الشخصي ---- */
+.pf-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.pf-head img {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--bg-light);
+}
+
+.pf-head .pf-name {
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.pf-head .pf-role {
+    color: var(--text-muted);
+    font-size: .85rem;
+}
+
+/* ---- 404 ---- */
+.nf404 {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    gap: 6px;
+}
+
+.nf404 .code {
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--blue-500);
+    line-height: 1;
+}
+
+.nf404 h1 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-top: 8px;
+}
+
+.nf404 p {
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+@media (max-width:1024px) {
+    .td-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width:720px) {
+    .td-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .td-card {
+        padding: 18px;
+    }
+
+    .ui-modal .um-actions {
+        flex-direction: column-reverse;
+    }
+}
+
+/* يضمن عمل الخاصية hidden حتى مع العناصر التي لها display مخصص */
+[hidden] {
+    display: none !important;
+}

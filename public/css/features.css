@@ -1,0 +1,362 @@
+/* features.css — تنسيقات الميزات الجديدة (v4): الصلاحيات، الصورة الشخصية، استعادة كلمة المرور،
+   الإحالة، الأقسام، سجل النشاطات، المعاملات العاجلة. يعتمد على متغيرات style.css ولا يغيّر الموجود. */
+[hidden] {
+   display: none !important;
+}
+
+/* ---- الصورة الشخصية ---- */
+.pf-head {
+   flex-wrap: wrap;
+}
+
+.pf-head img {
+   object-fit: cover;
+}
+
+.pf-photo-actions {
+   display: flex;
+   gap: 8px;
+   flex-wrap: wrap;
+   margin-inline-start: auto;
+}
+
+/* ---- استعادة كلمة المرور (تستعمل بطاقة .ax-card الموجودة) ---- */
+.ax-desc {
+   text-align: center;
+   color: var(--text-muted);
+   font-size: .88rem;
+   line-height: 1.8;
+   margin: -6px 0 6px;
+}
+
+.ax-desc b {
+   color: var(--text-dark);
+   direction: ltr;
+   unicode-bidi: embed;
+}
+
+.ax-code {
+   text-align: center !important;
+   letter-spacing: .55em;
+   font-weight: 800;
+   font-size: 1.2rem !important;
+   padding: 0 14px !important;
+   direction: ltr !important;
+}
+
+.ax-code::placeholder {
+   letter-spacing: .3em;
+   font-weight: 400;
+}
+
+.ax-note {
+   margin-top: 12px;
+   text-align: center;
+   font-size: .82rem;
+   font-weight: 700;
+   color: #1f9d55;
+}
+
+.ax-linkbtn {
+   display: block;
+   margin: 14px auto 0;
+   color: var(--ax-blue, #3d5fe0);
+   font-weight: 700;
+   font-size: .86rem;
+}
+
+.ax-linkbtn:disabled {
+   color: var(--text-muted);
+   cursor: default;
+   font-weight: 600;
+}
+
+.ax-linkbtn:not(:disabled):hover {
+   text-decoration: underline;
+}
+
+.ax-success {
+   text-align: center;
+   padding: 6px 0 2px;
+}
+
+.ax-success .ok-ico {
+   width: 58px;
+   height: 58px;
+   margin: 0 auto 12px;
+   border-radius: 50%;
+   display: grid;
+   place-items: center;
+   background: #e3f6ea;
+   color: #1f9d55;
+}
+
+.ax-success .ok-ico svg {
+   width: 30px;
+   height: 30px;
+}
+
+.ax-success h2 {
+   font-size: 1.05rem;
+   font-weight: 800;
+   margin-bottom: 6px;
+}
+
+.ax-success p {
+   color: var(--text-muted);
+   font-size: .88rem;
+   margin-bottom: 6px;
+}
+
+.ax-success .ax-submit {
+   display: grid;
+   place-items: center;
+}
+
+/* ---- الإحالة ---- */
+.fw-summary {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 6px 24px;
+   background: var(--bg-light);
+   border-radius: var(--radius-md);
+   padding: 14px 16px;
+   margin-bottom: 6px;
+}
+
+.fw-summary div {
+   font-size: .86rem;
+   color: var(--text-muted);
+}
+
+.fw-summary b {
+   color: var(--text-dark);
+}
+
+.td-step .s-n {
+   margin-top: 4px;
+   font-size: .8rem;
+   color: var(--text-body);
+   background: var(--bg-light);
+   border-radius: 8px;
+   padding: 6px 10px;
+}
+
+/* ---- المعاملات العاجلة / سجل النشاطات ---- */
+.ug-tabs {
+   display: flex;
+   gap: 8px;
+   flex-wrap: wrap;
+   margin-bottom: 16px;
+}
+
+.ug-tab {
+   display: inline-flex;
+   align-items: center;
+   gap: 8px;
+   padding: 9px 16px;
+   border-radius: var(--radius-pill);
+   background: #fff;
+   border: 1px solid var(--border-light);
+   font-weight: 700;
+   font-size: .86rem;
+   color: var(--text-body);
+}
+
+.ug-tab .ug-n {
+   min-width: 22px;
+   height: 22px;
+   padding: 0 6px;
+   border-radius: 11px;
+   display: inline-grid;
+   place-items: center;
+   background: var(--bg-light);
+   font-size: .76rem;
+}
+
+.ug-tab.active {
+   background: var(--blue-500, #3d5fe0);
+   border-color: transparent;
+   color: #fff;
+}
+
+.ug-tab.active .ug-n {
+   background: rgba(255, 255, 255, .22);
+   color: #fff;
+}
+
+.al-at {
+   direction: ltr;
+   text-align: start;
+   white-space: nowrap;
+   font-weight: 700;
+}
+
+.al-target {
+   direction: ltr;
+   text-align: start;
+}
+
+.al-note {
+   font-size: .74rem;
+   color: var(--text-muted);
+   font-weight: 600;
+}
+
+.fw-actions-note {
+   font-size: .8rem;
+   color: var(--text-muted);
+   margin-top: 6px;
+}
+
+/* ---- Phase 5: workflow progress on the transaction details page ---- */
+.td-workflow {
+   margin-bottom: 14px;
+}
+
+.wf-steps {
+   display: flex;
+   flex-direction: column;
+   gap: 2px;
+}
+
+.wf-step {
+   display: flex;
+   align-items: center;
+   gap: 9px;
+   padding: 9px 10px;
+   border: 1px solid var(--border-light);
+   border-radius: 10px;
+   background: #fff;
+}
+
+.wf-step .wf-i {
+   flex: 0 0 auto;
+   width: 24px;
+   height: 24px;
+   display: grid;
+   place-items: center;
+   border-radius: 50%;
+   font-size: .78rem;
+   font-weight: 800;
+   background: #f1f3f5;
+   color: var(--text-muted);
+}
+
+.wf-step.done .wf-i {
+   background: var(--green-text);
+   color: #fff;
+}
+
+.wf-step.current .wf-i {
+   background: var(--amber-text, #b7791f);
+   color: #fff;
+}
+
+.wf-step .wf-n {
+   font-weight: 700;
+   font-size: .85rem;
+}
+
+.wf-step .wf-t {
+   font-size: .76rem;
+   color: var(--text-muted);
+   margin-inline-start: auto;
+}
+
+.wf-step .wf-badge {
+   font-size: .7rem;
+   font-weight: 800;
+   color: #fff;
+   background: var(--amber-text, #b7791f);
+   border-radius: 20px;
+   padding: 2px 8px;
+}
+
+.wf-decisions {
+   margin-top: 10px;
+   display: flex;
+   flex-direction: column;
+   gap: 0;
+   padding-inline-start: 4px;
+}
+
+.wf-dec {
+   padding: 8px 0;
+   border-bottom: 1px solid var(--border-light);
+}
+
+.wf-dec:last-child {
+   border-bottom: none;
+}
+
+.wf-dec .s-t {
+   font-weight: 800;
+   font-size: .82rem;
+}
+
+.wf-dec .s-by {
+   font-size: .76rem;
+   color: var(--text-muted);
+}
+
+.wf-dec.rej .s-by {
+   color: var(--red-text);
+}
+
+.wf-dec .s-n {
+   font-size: .78rem;
+   color: var(--text-dark);
+}
+
+.wf-dec .s-at {
+   font-size: .74rem;
+   color: var(--text-muted);
+   direction: ltr;
+   text-align: start;
+}
+
+/* ---- Phase 7: inbox pagination + load-more affordances ---- */
+.pagination a.nav-btn {
+   display: inline-flex;
+   align-items: center;
+   text-decoration: none;
+}
+
+.pager-total {
+   font-size: .8rem;
+   color: var(--text-muted);
+   padding: 0 10px;
+   white-space: nowrap;
+}
+
+#trx-load-more-wrap {
+   justify-content: center;
+   margin-top: 12px;
+}
+
+/* ---- Phase 11: colleges management block on the departments page ---- */
+.college-add {
+   display: flex;
+   gap: 8px;
+   padding: 10px 14px;
+   border-top: 1px solid var(--border, #e3e8f5);
+}
+
+.college-add input {
+   flex: 1;
+   min-width: 0;
+   padding: 7px 10px;
+   border: 1px solid var(--border, #d7defa);
+   border-radius: 8px;
+   font: inherit;
+}
+
+.cg-input {
+   width: 100%;
+   max-width: 260px;
+   padding: 5px 8px;
+   border: 1px solid var(--accent, #3457d5);
+   border-radius: 6px;
+   font: inherit;
+}
